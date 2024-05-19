@@ -1,6 +1,7 @@
 import fs from 'fs';
 import { createCanvas } from "canvas";
-export function textToPNG({font, text, size})
+
+export async function textToPNG({font, text, size})
 {
     // Set canvas dimensions
     const canvasWidth = Number(size)*text.length;
@@ -20,11 +21,21 @@ export function textToPNG({font, text, size})
     ctx.fillText(text, canvasWidth/2, canvasHeight/2);
 
     // Save the canvas as a PNG file
-    const outputPath = './output.png'; // Replace with the desired output path
-    const out = fs.createWriteStream(outputPath);
-    const stream = canvas.createPNGStream();
-    stream.pipe(out);
-    out.on('finish', () => {
-        console.log(`PNG file saved at ${outputPath}`);
+    return new Promise((resolve, reject) => {
+        const outputPath = './output.png'; // Replace with the desired output path
+        const out = fs.createWriteStream(outputPath);
+        const stream = canvas.createPNGStream();
+        stream.pipe(out)
+
+        out.on('finish', () => {
+            resolve();
+        });
+    
+        out.on('error', (error) => {
+            console.error(error.message);
+            reject(error);
+        });
     });
+    
 }
+
