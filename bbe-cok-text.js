@@ -17,8 +17,12 @@ const knownText = {
     },
     pecanBottom: {
         text: "Pecan Bottom",  
+    },
+    northFive: {
+        text: "The North Five",  
     }
 };
+
 const knownDistances = [0.03, 0.07, 0.11, 0.14, 0.17, 0.18, 0.53, 0.88];
 
 const knownDistancesText = {};
