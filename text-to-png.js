@@ -1,7 +1,7 @@
 import fs from 'fs';
 import { createCanvas } from "canvas";
 
-export async function textToPNG({font, text, size})
+export async function textToPNG({font = defaultFont, text, size, file})
 {
     // Set canvas dimensions
     const canvasWidth = Number(size)*text.length;
@@ -22,7 +22,7 @@ export async function textToPNG({font, text, size})
 
     // Save the canvas as a PNG file
     return new Promise((resolve, reject) => {
-        const outputPath = './output.png'; // Replace with the desired output path
+        const outputPath = file; // Replace with the desired output path
         const out = fs.createWriteStream(outputPath);
         const stream = canvas.createPNGStream();
         stream.pipe(out)

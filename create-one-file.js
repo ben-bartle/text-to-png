@@ -12,6 +12,6 @@ const { font, text, size } = program.opts();
 
 console.log(`Writing ${text} using ${font}!`);
 
-await textToPNG({font, text, size});
+await textToPNG({font, text, size, file: './output/default.png'});
 
 console.log("File Written");
